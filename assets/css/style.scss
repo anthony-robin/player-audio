@@ -1,0 +1,365 @@
+@import "compass";
+
+
+$wrapper : 900px;
+$bleuSong : rgba(12, 12, 78, 0.5);
+
+@include font-face("Dosis", font-files("../fonts/Dosis-Regular.ttf"));
+@mixin imageControle(){
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	cursor: pointer;
+	a{display: none;}
+}
+
+div.clearer{clear:both; height: 0; line-height: 0;}
+
+body{
+	font-family: "Dosis", Arial, Helvetica, sans-serif;
+	background-color: #575757;
+	color: #fff;
+}
+
+div#navigateur{
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	padding: 0 10px;
+	bottom: 0;
+	left: 0;
+	@include background-image(linear-gradient(94deg, rgba(255,2,2,1) -25%, rgba(255,109,0,1) 125%));
+	display: none;
+
+	a{
+		color: #000;
+	}
+}
+
+div#wrapper{
+	width: $wrapper;
+	margin: 0 auto;
+
+	h1{
+		text-align: center;
+		color: #fff;
+		font-weight: normal;
+	}
+}
+
+div#infosDuBas{
+	position: relative;
+	width: 500px;
+	margin: 0;
+	overflow: auto;
+}
+
+
+div#playerAudio{
+	position: relative;
+	width: 800px;
+	margin: 20px auto 20px auto;
+	@include border-radius(20px);
+	@include filter-gradient( #313131, #787878); // IE6-8
+	$experimental-support-for-svg: true;
+	@include background-image(linear-gradient(#313131, #787878));
+	padding: 10px;
+	overflow: auto;
+
+	div#monSWF{
+		width: 800px;
+		height: 0;
+	}
+
+
+	div#haut{
+		overflow: hidden;
+		background-color: lighten(#000, 30%);
+		// background-color: lighten($bleuSong, 60%);
+		padding: 15px 0;
+		@include border-radius(15px);
+		@include box-shadow(#000 -2px 2px 20px);
+
+
+
+
+		div#boutons{
+			overflow: auto;
+			float: left;
+			width: 430px;
+			margin: 30px 60px 0 0;
+			overflow: visible;
+
+			p{
+				float: left;
+				margin: 0 10px;
+
+				&:first-child{
+					margin: 0 10px 0 20px;
+				}
+
+				a{@include link-colors(#fff); }
+			}
+
+			h4{
+				cursor: pointer;
+				margin-top: -20px;
+				margin-left: 215px;
+			}
+
+			div#controleVolume{
+				position: relative;
+				display: block;
+				width: 230px;
+				overflow: visible;
+				margin-left: 185px;
+				margin-top: -7px;
+
+				progress{
+					position: absolute;
+					width: 150px;
+					top: 0;
+					left: 0;
+					cursor: pointer;
+
+				    display: inline-block;
+				    -moz-box-sizing: border-box;
+				         box-sizing: border-box;
+				    height: 20px;
+				    padding: 3px 3px 2px 3px;
+				    background: #333;
+				    background: -webkit-linear-gradient(#2d2d2d,#444);
+				    background:    -moz-linear-gradient(#2d2d2d,#444);
+				    background:      -o-linear-gradient(#2d2d2d,#444);
+				    background:         linear-gradient(#2d2d2d,#444);
+				    // border: 1px solid rgba(0,0,0,.5);
+				    border-radius: 15px;
+				    box-shadow: 0 1px 0 rgba(255,255,255,.2);
+				}
+
+				progress::-webkit-progress-value {
+				    border-radius:10px;
+				    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+				                0 -1px 0 rgba(0,0,0,.8) inset,
+				                0 0 2px black;
+				    background-color: lighten($bleuSong, 50%);
+
+				}
+				progress::-webkit-progress-bar{background: transparent !important; }
+
+				span#barreVolume{
+					position: absolute;
+					top: 1px; left: 0;
+					width: 5px;
+					height: 20px;
+					background-color: #ddd;
+					cursor: pointer;
+				}
+
+				&>p{float: none; width: 50px;}
+
+				&>p#sonMute{
+					@include imageControle();
+					margin-left: 170px; margin-top: -15px;
+					&.mute{background: url('../images/controle/style2/picto_mute.png') 0 0 no-repeat; }
+
+				}
+			}
+
+			&>p#jouer{
+				@include imageControle();
+				&.play{background: url('../images/controle/style2/picto_play.png') 0 0 no-repeat; }
+				&.pause{background: url('../images/controle/style2/picto_pause.png') 0 0 no-repeat; }
+			}
+
+			&>p#stop{
+				@include imageControle();
+				&.stop{background: url('../images/controle/style2/picto_stop.png ') 0 0 no-repeat;}
+			}
+
+		} // fin de div#boutons
+
+		#progress{
+		    width: 300px;
+		    // height: 30px;
+		    margin: 10px auto 0 auto;
+		    color: #DADADA;
+		    float: left;
+			position: relative;
+
+			progress{
+				// margin-left: 40px;
+				width: 300px;
+			}
+
+			progress::-webkit-progress-value {
+			    border-radius:10px;
+			    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+			                0 -1px 0 rgba(0,0,0,.8) inset,
+			                0 0 2px black;
+			    background-color: lighten($bleuSong, 50%);
+
+			}
+
+			progress#progression{
+			    display: inline-block;
+			    -moz-box-sizing: border-box;
+			         box-sizing: border-box;
+			    height: 20px;
+			    padding: 3px 3px 2px 3px;
+			    background: #333;
+			    background: -webkit-linear-gradient(#2d2d2d,#444);
+			    background:    -moz-linear-gradient(#2d2d2d,#444);
+			    background:      -o-linear-gradient(#2d2d2d,#444);
+			    background:         linear-gradient(#2d2d2d,#444);
+			    // border: 1px solid rgba(0,0,0,.5);
+			    border-radius: 15px;
+			    box-shadow: 0 1px 0 rgba(255,255,255,.2);
+			}
+
+			progress#lecture {
+				position: absolute;
+				top: 0px; left: 0;
+			    display: inline-block;
+			    -moz-box-sizing: border-box;
+			         box-sizing: border-box;
+			    height: 20px;
+			    padding: 3px 3px 2px 3px;
+			    border-radius: 15px;
+			    cursor: pointer;
+			}
+
+			progress#lecture::-webkit-progress-value {background-color: lighten($bleuSong, 80%); }
+			progress#lecture::-moz-progress-value {background-color: lighten($bleuSong, 80%); }
+			progress::-webkit-progress-bar{background: transparent !important; }
+			progress::-moz-progress-bar{background: transparent !important; }
+
+			span#barreLecture{
+				position: absolute;
+				top: 1px; left: 0;
+				width: 10px;
+				height: 20px;
+				background-color: #ddd;
+				cursor: pointer;
+			}
+
+			div#chargementEtDuree{
+				overflow: auto;
+				width: 300px;
+				margin: -10px 0 0 0;
+
+				p#chargement{float: left;}
+				p#duree{float: right; margin-right: 8px;}
+			}
+		}
+
+
+		div.titreChanson{
+			// position: absolute;
+			// top: 10px;
+			// right: 20px;
+			margin-bottom: 8px;
+			text-align: center;
+			color: #DADADA;
+		}
+	}
+
+	div#milieu{
+		position: relative;
+
+		ul#metadonnees{
+			list-style-type: square;
+			color: #fff;
+			background-color: #313131;
+			padding: 5px 30px;
+
+			li{padding: 5px 10px; }
+		}
+
+		div#jaquette{
+			position: absolute;
+			right: 15px;
+			top: 15px;
+			width: 274px;
+			box-shadow: -5px 5px 5px #313131;
+
+			img{
+				max-width: 274px;
+			}
+
+			cite{
+				background: #111;
+				-moz-opacity:.75;
+				filter:alpha(opacity=75);
+				opacity:.85;
+				color: #fff;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 255px;
+				padding: 3px 10px;
+				border-top: 1px solid #5C5C5C;
+			}
+		}
+	}
+
+	div#explications{
+		padding: 0 45px;
+		color: #fff;
+
+		span.important{
+			color: $bleuSong;
+			font-weight: bold;
+			border-bottom: 1px dotted $bleuSong;
+		}
+	}
+
+} // Fin de <playerAudio>
+
+	ul#chansons{
+		float: left;
+		width: 425px;
+		list-style-position: inside;
+		vertical-align: middle;
+		margin-left: -20px;
+
+		li.titre{
+			list-style-image: none;
+			list-style-type: square;
+			cursor: pointer;
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+			padding: 5px 10px 10px 10px;
+			margin: 5px 0;
+			color: #fff;
+			width: 400px;
+
+			span:first-child{
+				color: #696969;
+				font-size: 14px;
+			}
+
+
+			&.couleurTitre{background-color: #313131; transition: background-color .8s;}
+			&.highlighted{
+				// background-color: $bleuSong;
+				list-style-image:url('../images/fleche.png');
+
+			}
+			&.survol{
+				background-color: $bleuSong;
+			}
+
+		}
+	}
+
+
+footer{
+	text-align: center;
+	margin: 20px 0;
+
+	p{
+		line-height: 20px;
+		height: 20px;
+	}
+}
