@@ -1,4 +1,6 @@
-player-audio
+Audio Player
 ============
 
-Audio Player in ActionScript 3 and Mootools
+This Audio Player has been achieved by combining a side **ActionScript 3** (based on play, pause, stop, ...) and the other with **Mootools** (management of events related to the user).
+
+It has all the basic features of a media player like the play/pause function, the volume control, the progress on the audio track, ...
